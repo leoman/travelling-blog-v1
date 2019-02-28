@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import Map from './views/Map';
+import Map from './components/Map';
 import { AppWrapper } from './styles';
 import { routeData } from './data/routeData';
+import MapView from './views/Map';
 
 const App = () => (
     <AppWrapper>
-        <Map locations={routeData} />
+        <MapView locations={routeData.reverse()} />
     </AppWrapper>
 );
 

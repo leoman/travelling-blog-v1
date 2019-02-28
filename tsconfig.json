@@ -17,9 +17,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "typeRoots": ["types"],
+    "types": ["googlemaps"],
   },
   "include": [
-    "src"
+    "src",
+    "typings/*.d.ts"
   ]
 }

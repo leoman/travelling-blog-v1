@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
+export const MapViewWrapper = styled.div`
+    display: flex;
+    width: 100%;
+`;
+
 export const MapWrapper = styled.div`
     width: 60%;
 `;
 
-export const MapMarker = styled.div`
-    background: red;
-    width: 10px;
-    height: 10px;
+export const ListWrapper = styled.div`
+    width: 40%;
+    overflow: auto;
 `;
