@@ -102,12 +102,12 @@ class Map extends PureComponent <Props> {
             lat: firstLocation.lat,
             lng: firstLocation.lng
         };
-
+        const key = process.env.GOOGLE_MAPS_API_KEY || '';
         return (
             <MapWrapper>
                 <div style={{ height: '100%', width: '100%' }}>
                     <GoogleMapReact
-                        bootstrapURLKeys={{ key: 'AIzaSyAJF1BL1LJ-ZTDQTqEY8ZtrLx-DF__P2GE' }}
+                        bootstrapURLKeys={{ key: key }}
                         defaultCenter={center}
                         defaultZoom={this.props.zoom}
                         yesIWantToUseGoogleMapApiInternals
