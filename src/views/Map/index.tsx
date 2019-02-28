@@ -98,7 +98,7 @@ class Map extends PureComponent <Props> {
             lat: firstLocation.lat,
             lng: firstLocation.lng
         };
-        const key = process.env.GOOGLE_MAPS_API_KEY || '';
+        const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || '';
         console.log(process.env, key);
         return (
             <MapWrapper>
