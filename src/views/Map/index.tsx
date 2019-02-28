@@ -107,7 +107,7 @@ class Map extends PureComponent <Props> {
             <MapWrapper>
                 <div style={{ height: '100%', width: '100%' }}>
                     <GoogleMapReact
-                        bootstrapURLKeys={{ client: 'gme-jll', v: 'dvs' }}
+                        bootstrapURLKeys={{ key: 'AIzaSyAJF1BL1LJ-ZTDQTqEY8ZtrLx-DF__P2GE' }}
                         defaultCenter={center}
                         defaultZoom={this.props.zoom}
                         yesIWantToUseGoogleMapApiInternals
