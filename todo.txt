@@ -1,0 +1,29 @@
+Typescript info
+https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935
+https://charleslbryant.gitbooks.io/hello-react-and-typescript/content/TypeScriptAndReact.html
+
+Front-end
+-----------
+Build Map Component
+    Build map to take in all route locations
+    Build map marker to show at route location
+    Build map marker to show with a tiny picture included
+Build route location list Component
+    Build single route location panel
+
+Build route location page
+    Build output of blog text for location post.
+
+Add route clustering to the map: http://istarkov.github.io/google-map-clustering-example/
+
+Backend
+-----------
+NodeSQL
+
+Hosting
+-----------
+Hosted on Heroku at: https://git.heroku.com/travelling-blog.git
+SQL data provided on either elephantsql, or Heroku. Need to finalise.
+
+Keeping the app alive: New relic pinging
+https://coderwall.com/p/u0x3nw/avoid-heroku-idling-with-new-relic-pings

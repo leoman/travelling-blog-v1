@@ -1,13 +1,30 @@
 import { RouteModel } from '../models/route';
 
-const routeData: RouteModel[] = [
+export const routeData: RouteModel[] = [
     {
         id: 1,
-        lat: 1,
-        lng: 2,
+        lat: 21.161907,
+        lng: -86.851524,
         location: 'Cancun',
         title: 'Day one of the journey',
         length: 1,
+    },
+    {
+        id: 2,
+        lat: 17.477763,
+        lng: -88.255911,
+        location: 'Belize',
+        title: 'Our first day in Belize',
+        length: 3,
+    }
+    ,
+    {
+        id: 3,
+        lat: 14.580053,
+        lng: -90.490899,
+        location: 'Guatemala',
+        title: 'Our first day in Guatemala',
+        length: 3,
     }
 ];
 
