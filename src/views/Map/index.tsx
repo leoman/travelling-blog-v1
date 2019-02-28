@@ -82,7 +82,6 @@ class Map extends PureComponent <Props> {
     apiIsLoaded = (map:any, maps:any, places:any) => {
         // Get bounds by our places
         const bounds = this.getMapBounds(map, maps, places);
-        console.log(bounds);
         // Fit map to bounds
         map.fitBounds(bounds);
         // Bind the resize listener
@@ -92,9 +91,6 @@ class Map extends PureComponent <Props> {
     };
 
     render() {
-
-        console.log(this.props);
-
         const { locations } = this.props;
 
         const [firstLocation] = locations;
@@ -103,6 +99,7 @@ class Map extends PureComponent <Props> {
             lng: firstLocation.lng
         };
         const key = process.env.GOOGLE_MAPS_API_KEY || '';
+        console.log(process.env, key);
         return (
             <MapWrapper>
                 <div style={{ height: '100%', width: '100%' }}>
