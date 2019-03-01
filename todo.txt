@@ -4,15 +4,6 @@ https://charleslbryant.gitbooks.io/hello-react-and-typescript/content/TypeScript
 
 Front-end
 -----------
-Build Map Component
-    Build map to take in all route locations
-    Build map marker to show at route location
-    Build map marker to show with a tiny picture included
-Build route location list Component
-    Build single route location panel
-
-Build route location page
-    Build output of blog text for location post.
 
 Add route clustering to the map: http://istarkov.github.io/google-map-clustering-example/
 

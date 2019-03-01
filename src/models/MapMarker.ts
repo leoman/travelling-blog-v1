@@ -1,5 +1,8 @@
+import { RouteModel } from './RouteModel';
+
 export interface MapMarkerModel {
-    text: String;
+    location: RouteModel;
     lat: number;
     lng: number;
+    hovered: boolean;
 }

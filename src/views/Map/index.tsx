@@ -1,22 +1,32 @@
-import React, { SFC } from 'react';
+import React, { PureComponent, SFC } from 'react';
 import Map from '../../components/Map';
 import LocationList from '../../components/LocationList';
-import { RouteModel } from '../../models/RouteModel';
+import MapViewModel from '../../models/MapViewModel';
 import { MapViewWrapper, MapWrapper, ListWrapper } from './styles';
 
-interface MapViewModel {
-    locations: RouteModel[]
-}
+export class MapView extends PureComponent <MapViewModel> {
 
-export const MapView: SFC<MapViewModel> = ({ locations }) => (
-    <MapViewWrapper>
-        <MapWrapper>
-            <Map locations={locations} />
-        </MapWrapper>
-        <ListWrapper>
-            <LocationList locations={locations} />
-        </ListWrapper>
-    </MapViewWrapper>
-);
+    state = {
+        hoveredLocationKey: null,
+    }
+
+    listItemHovered = (hoveredLocationKey: number) => this.setState({hoveredLocationKey})
+
+    render() {
+        const { locations } = this.props;
+        const { hoveredLocationKey } = this.state;
+
+        return (
+            <MapViewWrapper>
+                <MapWrapper>
+                    <Map locations={locations} hoveredLocationKey={hoveredLocationKey} />
+                </MapWrapper>
+                <ListWrapper>
+                    <LocationList locations={locations} listItemHovered={this.listItemHovered} />
+                </ListWrapper>
+            </MapViewWrapper>
+        );
+    }
+}
 
 export default MapView;

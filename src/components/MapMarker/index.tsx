@@ -1,6 +1,10 @@
 import React, { PureComponent, SFC } from 'react';
 import { MapMarkerModel } from '../../models/MapMarker';
-import { MapMarkerWrapper } from './styles';
+import { MapMarkerWrapper, MarkerImage } from './styles';
 
-export const MapMarker: SFC<MapMarkerModel> = ({ text }) => <MapMarkerWrapper>{text}</MapMarkerWrapper>;
+export const MapMarker: SFC<MapMarkerModel> = ({ location : { photo, slug }, hovered }) => (
+    <MapMarkerWrapper hovered={hovered}>
+        <MarkerImage to={`/posts/${slug}`} hovered={hovered} style={{backgroundImage: `url(/images/${photo})`}} />
+    </MapMarkerWrapper>
+);
 export default MapMarker;

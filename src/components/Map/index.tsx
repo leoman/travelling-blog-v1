@@ -7,6 +7,7 @@ import { MapWrapper } from './styles';
 type MapProps = {
     zoom: number;
     locations: RouteModel[];
+    hoveredLocationKey: null | number;
 }
 
 class Map extends PureComponent <MapProps> {
@@ -72,7 +73,7 @@ class Map extends PureComponent <MapProps> {
     };
 
     render() {
-        const { locations } = this.props;
+        const { locations, hoveredLocationKey } = this.props;
 
         const [firstLocation] = locations;
         const center = {
@@ -95,7 +96,8 @@ class Map extends PureComponent <MapProps> {
                             key={i}
                             lat={location.lat}
                             lng={location.lng}
-                            text="My Marker"
+                            hovered={i === hoveredLocationKey}
+                            location={location}
                         />
                     ))}
                     
