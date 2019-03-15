@@ -1,5 +1,5 @@
-import { RouteModel } from './RouteModel';
+import { PostModel } from './PostModel';
 
 export default interface MapViewModel {
-    locations: RouteModel[]
+    posts: PostModel[]
 }

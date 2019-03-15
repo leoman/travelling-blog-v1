@@ -1,11 +1,11 @@
 import React, { SFC } from 'react';
 import LocationPanel from './LocationPanel'
 import { LocationListModel } from '../../models/LocationList';
-import { RouteModel } from '../../models/RouteModel';
+import { PostModel } from '../../models/PostModel';
 
-export const LocationList: SFC<LocationListModel> = ({ locations, listItemHovered }) :any => {
-    return locations.map((location:RouteModel, i) => (
-        <LocationPanel key={i} i={i} location={location} listItemHovered={listItemHovered} />
+export const LocationList: SFC<LocationListModel> = ({ posts, listItemHovered }) :any => {
+    return posts.map((post:PostModel, i:number) => (
+        <LocationPanel key={i.toString()} i={i} post={post} listItemHovered={listItemHovered} />
     ))
 }
 

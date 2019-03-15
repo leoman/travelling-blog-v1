@@ -13,16 +13,16 @@ export class MapView extends PureComponent <MapViewModel> {
     listItemHovered = (hoveredLocationKey: number) => this.setState({hoveredLocationKey})
 
     render() {
-        const { locations } = this.props;
+        const { posts } = this.props;
         const { hoveredLocationKey } = this.state;
 
         return (
             <MapViewWrapper>
                 <MapWrapper>
-                    <Map locations={locations} hoveredLocationKey={hoveredLocationKey} />
+                    <Map posts={posts} hoveredLocationKey={hoveredLocationKey} />
                 </MapWrapper>
                 <ListWrapper>
-                    <LocationList locations={locations} listItemHovered={this.listItemHovered} />
+                    <LocationList posts={posts} listItemHovered={this.listItemHovered} />
                 </ListWrapper>
             </MapViewWrapper>
         );

@@ -1,6 +1,6 @@
-import { RouteModel } from './RouteModel';
+import { PostModel } from './PostModel';
 
 export interface LocationListModel {
-    locations: RouteModel[];
+    posts: PostModel[];
     listItemHovered(hoveredLocationKey: number): void;
 }

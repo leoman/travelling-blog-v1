@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { RouteModel } from '../../models/RouteModel';
+import { PostModel } from '../../models/PostModel';
 import MapMarker from '../MapMarker';
 import { MapWrapper } from './styles';
 
 type MapProps = {
     zoom: number;
-    locations: RouteModel[];
+    posts: PostModel[];
     hoveredLocationKey: null | number;
 }
 
@@ -16,13 +16,13 @@ class Map extends PureComponent <MapProps> {
         zoom: 11
     };
 
-    getMapBounds = (map:google.maps.Map, maps:any, locations:RouteModel[]) => {
+    getMapBounds = (map:google.maps.Map, maps:any, posts:PostModel[]) => {
         const bounds = new maps.LatLngBounds();
       
-        locations.filter(location => !location.hideFromBounding).forEach((location:RouteModel) => {
+        posts.filter(post => !post.location.hideFromBounding).forEach((post:PostModel) => {
             bounds.extend(new maps.LatLng(
-                location.lat,
-                location.lng,
+                post.location.lat,
+                post.location.lng,
             ));
         });
         return bounds;
@@ -36,11 +36,11 @@ class Map extends PureComponent <MapProps> {
         });
     };
 
-    travelPath = (map:google.maps.Map, maps:any, locations:RouteModel[]) => {
+    travelPath = (map:google.maps.Map, maps:any, posts:PostModel[]) => {
 
-        const path = locations.map((location:RouteModel) => ({
-            lat: location.lat,
-            lng: location.lng,
+        const path = posts.map((post:PostModel) => ({
+            lat: post.location.lat,
+            lng: post.location.lng,
         }));
 
         const lineSymbol = {
@@ -65,20 +65,20 @@ class Map extends PureComponent <MapProps> {
         flightPath.setMap(map);  
     }
 
-    apiIsLoaded = (map:google.maps.Map, maps:any, locations:RouteModel[]) => {
-        this.travelPath(map, maps, locations);
-        const bounds = this.getMapBounds(map, maps, locations);
+    apiIsLoaded = (map:google.maps.Map, maps:any, posts:PostModel[]) => {
+        this.travelPath(map, maps, posts);
+        const bounds = this.getMapBounds(map, maps, posts);
         map.fitBounds(bounds);
         this.bindResizeListener(map, maps, bounds);
     };
 
     render() {
-        const { locations, hoveredLocationKey } = this.props;
+        const { posts, hoveredLocationKey } = this.props;
 
-        const [firstLocation] = locations;
+        const [firstPost] = posts;
         const center = {
-            lat: firstLocation.lat,
-            lng: firstLocation.lng
+            lat: firstPost.location.lat,
+            lng: firstPost.location.lng
         };
         const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || '';
 
@@ -89,15 +89,15 @@ class Map extends PureComponent <MapProps> {
                     defaultCenter={center}
                     defaultZoom={this.props.zoom}
                     yesIWantToUseGoogleMapApiInternals
-                    onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps, locations)}
+                    onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps, posts)}
                 >
-                    {locations.map((location, i) => (
+                    {posts.map((post, i) => (
                         <MapMarker
                             key={i}
-                            lat={location.lat}
-                            lng={location.lng}
+                            lat={post.location.lat}
+                            lng={post.location.lng}
                             hovered={i === hoveredLocationKey}
-                            location={location}
+                            post={post}
                         />
                     ))}
                     

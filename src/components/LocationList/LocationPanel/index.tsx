@@ -1,14 +1,14 @@
 import React, { SFC } from 'react';
 import { PanelWrapper, ImagePane, HoverPanel, Title } from './styles';
-import { RouteModel } from '../../../models/RouteModel';
+import { PostModel } from '../../../models/PostModel';
 
 export interface LocationPanelModel {
-    location: RouteModel;
+    post: PostModel;
     listItemHovered(hoveredLocationKey: null | number): void;
     i: number;
 }
 
-export const LocationPanel: SFC<LocationPanelModel> = ({ location: { title, photo, slug }, listItemHovered, i }) => (
+export const LocationPanel: SFC<LocationPanelModel> = ({ post: { title, photo, slug }, listItemHovered, i }) => (
     <PanelWrapper to={`/posts/${slug}`} onMouseEnter={() => listItemHovered(i)} onMouseLeave={() => listItemHovered(null)} >
         <ImagePane src={`/images/${photo}`} />
         <HoverPanel>

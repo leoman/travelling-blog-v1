@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { AppWrapper } from './styles';
-import { routeData } from './data/routeData';
+import { postData } from './data/postData';
 import MapView from './views/Map';
 import PostView from './views/Post';
+import PostListView from './views/Admin/Post/ListPosts';
+import EditPost from './views/Admin/Post/EditPost';
 
 const App = () => (
     <AppWrapper>
         <Router>
             <Switch>
                 <Route path="/" exact>
-                    <MapView locations={routeData.reverse()} />
+                    <MapView posts={postData.reverse()} />
                 </Route>
                 <Route path="/posts/:slug" exact component={PostView} />
+                <Route path="/admin/posts" exact component={PostListView} />
+                <Route path="/admin/posts/:id" exact component={EditPost} />
                 <Route>
                     <Redirect to="/"/>
                 </Route>

@@ -2,17 +2,17 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import { PostViewWrapper, ContentWrapper, TitleWrapper, HoverWrapper, TextWrapper, Days, Title, Location } from './styles';
-import { routeData } from '../../data/routeData';
+import { postData } from '../../data/postData';
 
 
 
 export const PostView = ({ match : { params : { slug } } }: any) => {
 
-    const locationData = routeData.find(location => location.slug === slug);
+    const post = postData.find(post => post.slug === slug);
 
-    if(locationData === undefined) return null;
+    if(post === undefined) return null;
 
-    const { photo, location, date, title, post: { titleColour } } = locationData;
+    const { photo, location: { location }, date, title, titleColour } = post;
 
     return (
         <PostViewWrapper>

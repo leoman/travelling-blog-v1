@@ -1,7 +1,7 @@
-import { RouteModel } from './RouteModel';
+import { PostModel } from './PostModel';
 
 export interface MapMarkerModel {
-    location: RouteModel;
+    post: PostModel;
     lat: number;
     lng: number;
     hovered: boolean;
