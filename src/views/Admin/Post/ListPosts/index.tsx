@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { postData } from '../../../../data/postData';
+import { PostModel } from '../../../../models/PostModel';
+import NetworkService from '../../../../service';
 import moment from 'moment';
 import {
     Container,
@@ -15,17 +16,46 @@ import {
     P,
     Hr,
     Button,
+    Breadcrumb,
+    BreadcrumbItem,
 } from '@bootstrap-styled/v4';
 import { Link } from "react-router-dom";
-import { Table } from './styles';
+import { Table, ControlBar } from './styles';
 
-class ListView extends PureComponent {
+interface ListViewProps {
+    
+}
 
-    componentDidMount() {
-        // call API for 
+interface ListViewState {
+    posts: PostModel[]
+}
+
+class ListView extends PureComponent <ListViewProps, ListViewState> {
+
+    constructor(props: ListViewProps) {
+        super(props);
+
+        this.state = {
+            posts: [],
+        }
+    }
+
+    async componentDidMount()  {
+        const posts = await NetworkService.getPosts();
+
+        if(!posts) return null;
+        
+        this.setState({
+            posts
+        });
     }
 
     render() {
+
+        const { posts } = this.state;
+
+        if (!posts) return null;
+
         return (
             <Container>
                 <Row>
@@ -35,6 +65,21 @@ class ListView extends PureComponent {
                         <P lead>Please use the list below to adminitor changes to Posts.</P>
                         <Hr className="my-4" />
                     </Jumbotron>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col lg="12">
+
+                        <Breadcrumb>
+                            <BreadcrumbItem active>Home</BreadcrumbItem>
+                        </Breadcrumb>
+
+                        <ControlBar>
+                            <Link to={`/admin/posts/add`}>
+                                <Button outline="true" color="primary">Add Post</Button>
+                            </Link>
+                        </ControlBar>
                     </Col>
                 </Row>
 
@@ -55,7 +100,7 @@ class ListView extends PureComponent {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {postData.map(({ id, title, date }, i) => (
+                                {posts.map(({ id, title, date }, i) => (
                                     <Tr key={i.toString()}>
                                         <Td>
                                             Title: {title}
@@ -64,7 +109,7 @@ class ListView extends PureComponent {
                                             Date: {moment(date).format("MMMM Do YYYY")}
                                         </Td>
                                         <Td>
-                                            <Link to={`/admin/posts/${id}`}>
+                                            <Link to={`/admin/posts/edit/${id}`}>
                                                 <Button outline="true" color="primary">Edit</Button>
                                             </Link>
                                         </Td>

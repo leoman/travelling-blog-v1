@@ -9,20 +9,25 @@ interface EditorProps {
 
 interface EditorState {
     content: string;
+    viewMode: ViewModes;
+}
+
+enum ViewModes {
+    Code = "Code",
+    View = "View",
+    Split = "Split",
 }
 
 class Editor extends PureComponent <EditorProps, EditorState> {
 
-    // View modes - plain HTML, Rendered HTML
-
     private $editor = React.createRef<HTMLTextAreaElement>();
-    // private $editor = React.createRef<any>();
 
     constructor(props: any) {
         super(props);
 
         this.state = {
             content: props.value || '',
+            viewMode: ViewModes.Split,
         }
     }
 
@@ -41,11 +46,13 @@ class Editor extends PureComponent <EditorProps, EditorState> {
         this.onChange($editor.current.value);
     }
 
+    viewMode = (viewMode: ViewModes) => {
+        this.setState({ viewMode })
+    }
+
     render() {
 
-        const { content } = this.state;
-
-        console.log(content);
+        const { content, viewMode } = this.state;
 
         return (
             <Wrapper>
@@ -61,19 +68,23 @@ class Editor extends PureComponent <EditorProps, EditorState> {
                         </ListItem>
                         <ListItem data-type="p" onClick={this.insert} title="P">P</ListItem>
                         <ListItem data-type="br" onClick={this.insert} title="Blank Line">Blank</ListItem>
+
+                        <ListItem onClick={() => this.viewMode(ViewModes.Code)}>Code</ListItem>
+                        <ListItem onClick={() => this.viewMode(ViewModes.View)}>View</ListItem>
+                        <ListItem onClick={() => this.viewMode(ViewModes.Split)}>Split</ListItem>
                     </List>
                     
                 </Navigation>
 
                 <PanelWrapper>
 
-                    <Panel> 
+                    <Panel show={viewMode === ViewModes.Split || viewMode === ViewModes.Code}> 
                         
                         <Textarea ref={this.$editor} value={content} onChange={(e: React.FormEvent<HTMLTextAreaElement>) => this.onChange(e.currentTarget.value)} />
                         
                     </Panel>
 
-                    <Panel>
+                    <Panel show={viewMode === ViewModes.Split || viewMode === ViewModes.View}>
                         <RenderedPanel>
                             <span dangerouslySetInnerHTML={{ __html: content }} />
                         </RenderedPanel>

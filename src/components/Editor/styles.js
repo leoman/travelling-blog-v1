@@ -34,6 +34,7 @@ export const PanelWrapper = styled.div`
 `;
 
 export const Panel =  styled.div`
+    display: ${props => (props.show ? 'block' : 'none')}; 
     min-height: 100px;
     flex: 1;
 
@@ -58,4 +59,5 @@ export const Textarea = styled(StyledTextArea)`
 
 export const RenderedPanel = styled.div`
     padding: 20px;
+    min-height: 200px;
 `;
