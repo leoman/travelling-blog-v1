@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { PostModel, initialState } from '../../../../models/PostModel';
 import PostForm from '../PostForm';
+import NetworkService from '../../../../service';
 import {
     Container,
     Row,
@@ -10,10 +11,14 @@ import {
     Hr,
     Breadcrumb,
     BreadcrumbItem,
+    Button,
 } from '@bootstrap-styled/v4';
-import { Link } from "react-router-dom";
+import { Link, withRouter, RouteComponentProps } from "react-router-dom";
+import { ControlBar } from '../EditPost/styles';
 
-interface AddPostProps {}
+interface AddPostProps extends RouteComponentProps<any> {
+   
+}
 
 interface AddPostState {
     post: PostModel
@@ -31,8 +36,19 @@ class AddPost extends PureComponent <AddPostProps, AddPostState> {
 
     onChange = (post: PostModel) => this.setState({ post });
 
-    onSave = () => {
-        console.log(this.state.post);
+    onSave = async () => {
+        const { history } = this.props;
+        const { post } = this.state;
+
+        if (!post) return null;
+
+        const response = await NetworkService.addPost(post);
+
+        console.log(response);
+
+        if(response && !response.error) {
+            history.push('/admin/posts');
+        }
     }
 
     render() {
@@ -59,7 +75,9 @@ class AddPost extends PureComponent <AddPostProps, AddPostState> {
                             </Breadcrumb>
                         </div>
 
-                        <p onClick={() => this.onSave()}>Save the post</p>
+                        <ControlBar>
+                            <Button onClick={() => this.onSave()} outline="true" color="primary">Save Post</Button>
+                        </ControlBar>
 
                         <PostForm post={post} onChange={this.onChange} />
                     </Col>
@@ -70,4 +88,4 @@ class AddPost extends PureComponent <AddPostProps, AddPostState> {
 
 }
 
-export default AddPost;
+export default withRouter(AddPost);

@@ -12,7 +12,15 @@ class RequestService {
     }
 
     async postData(url: string, data: any) {
+
+        const token: any = localStorage.getItem('token');
+
         return await (await(fetch(url, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'x-access-token': token,
+                },
                 method: 'post',
                 body: JSON.stringify(data)
             })
@@ -26,7 +34,15 @@ class RequestService {
     }
 
     async putData(url: string, data: any) {
+
+        const token: any = localStorage.getItem('token');
+
         return await (await(fetch(url, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'x-access-token': token,
+                },
                 method: 'put',
                 body: JSON.stringify(data)
             })

@@ -8,6 +8,7 @@ import {
     InputGroup,
     InputGroupAddon,
     Input,
+    Label,
 } from '@bootstrap-styled/v4';
 
 interface PostFormProps {
@@ -57,7 +58,7 @@ class PostForm extends PureComponent <PostFormProps, PostFormState> {
 
         const { post }: PostFormState = this.state;
 
-        const { title, titleColour, content, photo, location: { location, duration, lat, lng } } = post;
+        const { title, slug, titleColour, content, photo, location: { location, duration, lat, lng, hideFromBounding } } = post;
 
         return (
             <Form>
@@ -65,6 +66,12 @@ class PostForm extends PureComponent <PostFormProps, PostFormState> {
                     <InputGroup>
                         <InputGroupAddon>Title</InputGroupAddon>
                         <Input onChange={(e: React.FormEvent<HTMLInputElement>) => this.onChange(e.currentTarget.value, 'title')} value={title} type="text" className="form-control" />
+                    </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                    <InputGroup>
+                        <InputGroupAddon>Slug</InputGroupAddon>
+                        <Input disabled value={slug} type="text" className="form-control" />
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -95,6 +102,9 @@ class PostForm extends PureComponent <PostFormProps, PostFormState> {
                     
                         <InputGroupAddon>Lng</InputGroupAddon>
                         <Input onChange={(e: React.FormEvent<HTMLInputElement>) => this.onChange(e.currentTarget.value, 'lng', true, 'location')} value={lng} type="text" className="form-control" />
+                    
+                        <InputGroupAddon>Hide</InputGroupAddon>
+                        <Input onChange={(e: React.FormEvent<HTMLInputElement>) => this.onChange(!hideFromBounding, 'hideFromBounding', true, 'location')} value={hideFromBounding} checked={hideFromBounding} type="checkbox" className="form-control" />{' '}
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>

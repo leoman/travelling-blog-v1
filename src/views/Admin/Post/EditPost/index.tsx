@@ -12,6 +12,7 @@ import {
     Breadcrumb,
     BreadcrumbItem,
     Button,
+    Alert,
 } from '@bootstrap-styled/v4';
 import { Link } from "react-router-dom";
 import { ControlBar } from './styles';
@@ -26,6 +27,7 @@ interface EditPostProps {
 
 interface EditPostState {
     post?: PostModel
+    message: string;
 }
 
 class EditPost extends PureComponent <EditPostProps, EditPostState> {
@@ -35,6 +37,7 @@ class EditPost extends PureComponent <EditPostProps, EditPostState> {
 
         this.state = {
             post: undefined,
+            message: '',
         }
     }
 
@@ -58,12 +61,14 @@ class EditPost extends PureComponent <EditPostProps, EditPostState> {
 
         const response = await NetworkService.editPost(parseInt(id), post);
 
-        console.log(response);
+        if(response) {
+            this.setState({ message: 'Post has been updated', post: response });
+        }
     }
 
     render() {
 
-        const { post }: EditPostState = this.state;
+        const { post, message }: EditPostState = this.state;
 
         if (!post) return null;
 
@@ -80,6 +85,9 @@ class EditPost extends PureComponent <EditPostProps, EditPostState> {
 
                 <Row>
                     <Col>
+
+                        {message && <Alert color="success" isOpen={message} uncontrolled autoHideDuration="5000">{message}</Alert>}
+
                         <Breadcrumb>
                             <BreadcrumbItem><Link to={'/admin/posts'}>Home</Link></BreadcrumbItem>
                             <BreadcrumbItem active>Edit Post</BreadcrumbItem>
