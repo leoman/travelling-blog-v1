@@ -14,7 +14,7 @@ export class MapView extends PureComponent <MapViewModel> {
     }
 
     async componentDidMount() {
-        const posts = await NetworkService.getPosts();
+        const posts = await NetworkService.getLivePosts();
         if(!posts) return null;
         this.setState({ posts });
     }

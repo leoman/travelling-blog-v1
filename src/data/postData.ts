@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { PostModel } from '../models/PostModel';
+import { PostModel, Status } from '../models/PostModel';
 
 export const postData: PostModel[] = [
     {
@@ -10,6 +10,7 @@ export const postData: PostModel[] = [
         content: '',
         date: new Date(moment().subtract(10, 'days').format()),
         photo: 'photo-6.jpg',
+        status: Status.draft,
         location: {
             location: 'London',
             lat: 51.521585,
@@ -25,6 +26,7 @@ export const postData: PostModel[] = [
         titleColour: '#000000',
         photo: 'photo-5.jpg',
         content: '',
+        status: Status.draft,
         date: new Date(moment().subtract(9, 'days').format()),
         location: {
             lat: 21.161907,
@@ -39,6 +41,7 @@ export const postData: PostModel[] = [
         titleColour: '#000000',
         title: 'Our first day in Belize',
         photo: 'photo-4.jpg',
+        status: Status.draft,
         date: new Date(moment().subtract(7, 'days').format()),
         location: {
             duration: 3,
@@ -53,6 +56,7 @@ export const postData: PostModel[] = [
         titleColour: '#FFFFFF',
         title: 'Our first day in Guatemala',
         photo: 'photo-3.jpg',
+        status: Status.draft,
         date: new Date(moment().subtract(5, 'days').format()),
         location: {
             duration: 3,
@@ -67,6 +71,7 @@ export const postData: PostModel[] = [
         titleColour: '#FFFFFF',
         title: 'Our first day in Honduras',
         photo: 'photo-2.jpg',
+        status: Status.draft,
         date: new Date(moment().subtract(2, 'days').format()),
         location: {
             duration: 3,
@@ -81,6 +86,7 @@ export const postData: PostModel[] = [
         titleColour: '#000000',
         title: 'Our first day in Nicaragua',
         photo: 'photo-1.jpg',
+        status: Status.draft,
         date: new Date(),
         content: `<h1>Our first day in Nicaragua</h1><br /><p>Isnt this exciting</p>`,
         location: {

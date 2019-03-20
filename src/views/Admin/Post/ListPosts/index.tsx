@@ -18,6 +18,10 @@ import {
     Button,
     Breadcrumb,
     BreadcrumbItem,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
 } from '@bootstrap-styled/v4';
 import { Link } from "react-router-dom";
 import { Table, ControlBar } from './styles';
@@ -27,7 +31,9 @@ interface ListViewProps {
 }
 
 interface ListViewState {
-    posts: PostModel[]
+    posts: PostModel[];
+    modal: boolean;
+    id: number | null;
 }
 
 class ListView extends PureComponent <ListViewProps, ListViewState> {
@@ -37,6 +43,8 @@ class ListView extends PureComponent <ListViewProps, ListViewState> {
 
         this.state = {
             posts: [],
+            modal: false,
+            id: null,
         }
     }
 
@@ -50,9 +58,46 @@ class ListView extends PureComponent <ListViewProps, ListViewState> {
         });
     }
 
+    showDeleteModal = (id: any) => {
+        this.setState({
+            id,
+            modal: true,
+        });
+    }
+
+    closeDeleteModal = () => {
+        this.setState({
+            id: null,
+            modal: false,
+        });
+    }
+
+    confirmDelete = () => {
+        const { id } = this.state;
+        if(!id) return null;
+
+        this.onDelete(id);
+        this.closeDeleteModal();
+    }
+
+    onDelete = async (id: number) => {
+        const response = await NetworkService.deletePost(id);
+        
+        if(response.success) {
+
+            const posts = await NetworkService.getPosts();
+
+            if(!posts) return null;
+            
+            this.setState({
+                posts
+            });
+        }
+    }
+
     render() {
 
-        const { posts } = this.state;
+        const { posts, modal } = this.state;
 
         if (!posts) return null;
 
@@ -67,6 +112,17 @@ class ListView extends PureComponent <ListViewProps, ListViewState> {
                     </Jumbotron>
                     </Col>
                 </Row>
+
+                <Modal isOpen={modal} toggle={() => this.closeDeleteModal()}>
+                    <ModalHeader toggle={() => this.closeDeleteModal()}>Delete Post</ModalHeader>
+                    <ModalBody>
+                        This action cannot be un done.
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" onClick={() => this.confirmDelete()}>Confirm Delete</Button>
+                        <Button color="secondary" onClick={() => this.closeDeleteModal()}>Cancel</Button>
+                    </ModalFooter>
+                </Modal>
 
                 <Row>
                     <Col lg="12">
@@ -92,6 +148,9 @@ class ListView extends PureComponent <ListViewProps, ListViewState> {
                                         Title
                                     </Th>
                                     <Th>
+                                        Status
+                                    </Th>
+                                    <Th>
                                         Date
                                     </Th>
                                     <Th colSpan={2}>
@@ -100,13 +159,16 @@ class ListView extends PureComponent <ListViewProps, ListViewState> {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {posts.map(({ id, title, date }, i) => (
+                                {posts.map(({ id, title, date, status }, i) => (
                                     <Tr key={i.toString()}>
                                         <Td>
-                                            Title: {title}
+                                            {title}
                                         </Td>
                                         <Td>
-                                            Date: {moment(date).format("MMMM Do YYYY")}
+                                            {status}
+                                        </Td>
+                                        <Td>
+                                            {moment(date).format("MMMM Do YYYY")}
                                         </Td>
                                         <Td>
                                             <Link to={`/admin/posts/edit/${id}`}>
@@ -114,7 +176,7 @@ class ListView extends PureComponent <ListViewProps, ListViewState> {
                                             </Link>
                                         </Td>
                                         <Td>
-                                            <Button outline={true} color="danger">Delete</Button>
+                                            <Button onClick={() => this.showDeleteModal(id)} outline={true} color="danger">Delete</Button>
                                         </Td>
                                     </Tr>
                                 ))}

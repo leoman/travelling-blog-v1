@@ -9,6 +9,8 @@ import {
     InputGroupAddon,
     Input,
     Label,
+    Select,
+    Option,
 } from '@bootstrap-styled/v4';
 
 interface PostFormProps {
@@ -58,7 +60,7 @@ class PostForm extends PureComponent <PostFormProps, PostFormState> {
 
         const { post }: PostFormState = this.state;
 
-        const { title, slug, titleColour, content, photo, location: { location, duration, lat, lng, hideFromBounding } } = post;
+        const { title, slug, titleColour, content, photo, status, location: { location, duration, lat, lng, hideFromBounding } } = post;
 
         return (
             <Form>
@@ -103,6 +105,12 @@ class PostForm extends PureComponent <PostFormProps, PostFormState> {
                         <InputGroupAddon>Lng</InputGroupAddon>
                         <Input onChange={(e: React.FormEvent<HTMLInputElement>) => this.onChange(e.currentTarget.value, 'lng', true, 'location')} value={lng} type="text" className="form-control" />
                     
+                        <InputGroupAddon>Status</InputGroupAddon>
+                        <Select value={status} onChange={(e: React.FormEvent<HTMLSelectElement>) => this.onChange(e.currentTarget.value, 'status')} >
+                            <Option value="draft">Draft</Option>
+                            <Option value="live">Live</Option>
+                        </Select>
+
                         <InputGroupAddon>Hide</InputGroupAddon>
                         <Input onChange={(e: React.FormEvent<HTMLInputElement>) => this.onChange(!hideFromBounding, 'hideFromBounding', true, 'location')} value={hideFromBounding} checked={hideFromBounding} type="checkbox" className="form-control" />{' '}
                     </InputGroup>

@@ -40,6 +40,8 @@ class AddPost extends PureComponent <AddPostProps, AddPostState> {
         const { history } = this.props;
         const { post } = this.state;
 
+        console.log(post);
+
         if (!post) return null;
 
         const response = await NetworkService.addPost(post);

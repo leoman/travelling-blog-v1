@@ -6,6 +6,11 @@ export interface LocationModel {
     hideFromBounding?: boolean;
 }
 
+export enum Status {
+    draft = "draft",
+    live = "live",
+}
+
 export interface PostModel {
     id?: number;
     title: string;
@@ -14,6 +19,7 @@ export interface PostModel {
     photo?: string;
     date: Date;
     content?: string;
+    status: Status;
     location: LocationModel
 }
 
@@ -23,6 +29,7 @@ export const initialState: PostModel = {
     content: '',
     photo: '',
     date: new Date(),
+    status: Status.draft,
     location: { 
         location: '',
         duration: 0,
