@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import NetworkService from '../../service';
 import { Link } from "react-router-dom";
-import { PostViewWrapper, ContentWrapper, TitleWrapper, HoverWrapper, TextWrapper, Days, Title, Location } from './styles';
-import { postData } from '../../data/postData';
+import { PostViewWrapper, Header, ContentWrapper, TitleWrapper, HoverWrapper, TextWrapper, Days, Title, Location } from './styles';
+import PostContent from '../../components/PostContent';
 
 
 export class PostView extends PureComponent  {
@@ -29,20 +29,25 @@ export class PostView extends PureComponent  {
 
         return (
             <PostViewWrapper>
+
                 <TitleWrapper
                     style={{backgroundImage: `url(/images/${photo})`}}
                 >
-                    <HoverWrapper>
-                        <TextWrapper>
-                            <Days titleColour={titleColour}>{moment(date).format("MMMM Do YYYY")}</Days>
-                            <Title titleColour={titleColour}>{title}</Title>
-                            <Location titleColour={titleColour}>{location}</Location>
-                        </TextWrapper>
-                    </HoverWrapper>
+                    <Header>
+                        <HoverWrapper>
+                            <TextWrapper>
+                                <Days titleColour={titleColour}>{moment(date).format("MMMM Do YYYY")}</Days>
+                                <Title titleColour={titleColour}>{title}</Title>
+                                <Location titleColour={titleColour}>{location}</Location>
+                            </TextWrapper>
+                        </HoverWrapper>
+                    </Header>
                 </TitleWrapper>
 
                 <ContentWrapper>
                     <Link to={'/'}>Back to homepage</Link>
+
+                    <PostContent />
                 </ContentWrapper>
             </PostViewWrapper>
         );

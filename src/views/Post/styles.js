@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
 export const PostViewWrapper = styled.div`
-    margin: auto;
-    background: #ccc;
+    width: 100%;
     height: 100%;
+`;
 
+export const Header = styled.div`
+    margin: 0 auto 0px;
+    
     @media (max-width: 1230px) and (min-width: 1024px) {
         width: 1024px;
     }
@@ -27,9 +30,6 @@ export const PostViewWrapper = styled.div`
     }
 `;
 
-export const ContentWrapper = styled.div`
-`;
-
 export const TitleWrapper = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
@@ -47,6 +47,7 @@ export const TitleWrapper = styled.div`
 
 export const HoverWrapper = styled.div`
     max-width: 55%;
+    margin: 0 auto;
 
     &::before {
         content: " ";
@@ -110,4 +111,7 @@ export const Location = styled(Text)`
     ${TitleWrapper}:hover & {
         transform: scale(1.2) translate(25px, 15px);
     }
+`;
+
+export const ContentWrapper = styled.div`
 `;
