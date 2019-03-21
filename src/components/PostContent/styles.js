@@ -68,4 +68,25 @@ export const ContentWrapper = styled.div`
     .full-width {
         width: 100%;
     }
+
+    .center {
+        text-align: center;
+    }
+
+    .double {
+        display: flex;
+        flex-direction: row;
+        width: 80%;
+        margin: 0 auto;
+
+        img {
+            width: 50%;
+            object-fit: cover;
+        }
+    }
+`;
+
+export const DoubleImageWrapper = styled.div`
+    
+
 `;

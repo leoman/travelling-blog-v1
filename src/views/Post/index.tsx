@@ -25,7 +25,7 @@ export class PostView extends PureComponent  {
     
         if(post === null) return null;
 
-        const { photo, location: { location }, date, title, titleColour } = post;
+        const { photo, content, location: { location }, date, title, titleColour } = post;
 
         return (
             <PostViewWrapper>
@@ -45,9 +45,9 @@ export class PostView extends PureComponent  {
                 </TitleWrapper>
 
                 <ContentWrapper>
-                    <Link to={'/'}>Back to homepage</Link>
+                    {/* <Link to={'/'}>Back to homepage</Link> */}
 
-                    <PostContent />
+                    <PostContent content={content} />
                 </ContentWrapper>
             </PostViewWrapper>
         );
