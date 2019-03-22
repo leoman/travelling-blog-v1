@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import textInsert from '../../utils/textInsert';
 import { Wrapper, Panel, Navigation, List, ListItem, PanelWrapper, Textarea, RenderedPanel } from './styles';
+import { ContentWrapper } from '../PostContent/styles';
 
 interface EditorProps {
     onChange(content: string): void;
@@ -86,7 +87,9 @@ class Editor extends PureComponent <EditorProps, EditorState> {
 
                     <Panel show={viewMode === ViewModes.Split || viewMode === ViewModes.View}>
                         <RenderedPanel>
-                            <span dangerouslySetInnerHTML={{ __html: content }} />
+                            <ContentWrapper>
+                                <span dangerouslySetInnerHTML={{ __html: content }} />
+                            </ContentWrapper>
                         </RenderedPanel>
                     </Panel>
 

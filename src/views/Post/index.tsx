@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import NetworkService from '../../service';
-import { Link } from "react-router-dom";
+import ScrollProgress from '../../components/ScrollProgress';
 import { PostViewWrapper, Header, ContentWrapper, TitleWrapper, HoverWrapper, TextWrapper, Days, Title, Location } from './styles';
 import PostContent from '../../components/PostContent';
 
@@ -29,6 +29,8 @@ export class PostView extends PureComponent  {
 
         return (
             <PostViewWrapper>
+
+                <ScrollProgress />
 
                 <TitleWrapper
                     style={{backgroundImage: `url(/images/${photo})`}}

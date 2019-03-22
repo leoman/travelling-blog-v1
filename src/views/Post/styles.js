@@ -37,6 +37,22 @@ export const TitleWrapper = styled.div`
     width: 100%;
     height: 300px;
 
+    @media (max-width: 767px) {
+        height: 300px;
+    }
+
+    @media (max-width: 1023px) and (min-width: 768px) {
+        height: 300px;
+    }
+
+    @media (min-width: 1230px) {
+        height: 300px;
+    }
+
+    @media (min-width: 1400px) {
+        height: 400px;
+    }
+
     margin: 0 auto 0px;
     position: relative;
     display: flex;

@@ -50,11 +50,14 @@ export const Editor = styled.div`
 
 export const Textarea = styled(StyledTextArea)`
     padding: 20px;
-    min-height: 200px;
+    height: 100%;
+    min-height: 400px;
     width: 100%;
     outline: none;
     border: none;
     border-right: 1px solid rgba(0,0,0,0.15);
+    font-size: 16px;
+    font-family: 'lato','HelveticaNeue','Helvetica Neue','Helvetica-Neue',Helvetica,Arial,sans-serif;
 `;
 
 export const RenderedPanel = styled.div`
