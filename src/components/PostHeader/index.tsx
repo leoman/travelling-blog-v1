@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Header, TitleWrapper, HoverWrapper, TextWrapper, Days, Title, Location } from './styles';
 
-export const PostHeader = ({ photo, location: { location }, date, title, titleColour }: any) => (
+export const PostHeader = ({ post : { photo, location: { location }, date, title, titleColour } }: any ) => (
     <TitleWrapper
         style={{backgroundImage: `url(/images/${photo})`}}
     >

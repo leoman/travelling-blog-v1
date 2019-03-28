@@ -156,6 +156,10 @@ export const ContentWrapper = styled.div`
         }
 
     }
+
+    img {
+        cursor: pointer;
+    }
 `;
 
 export const DoubleImageWrapper = styled.div`

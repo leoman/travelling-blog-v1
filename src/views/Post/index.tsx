@@ -1,33 +1,61 @@
 import React, { PureComponent } from 'react';
 import NetworkService from '../../service';
 import ScrollProgress from '../../components/ScrollProgress';
+import ScrollTop from '../../components/ScrollTop';
 import { PostViewWrapper, Header, ContentWrapper, TitleWrapper, HoverWrapper, TextWrapper, Days, Title, Location } from './styles';
 import PostHeader from '../../components/PostHeader';
 import PostContent from '../../components/PostContent';
+import Footer from '../../components/Footer';
+import Loading from '../../components/Loading';
+import { PostModel } from '../../models/PostModel';
 
-export class PostView extends PureComponent  {
+interface Props {
+    match : { 
+        params : { 
+            slug: string
+        }
+    } 
+}
+
+interface State {
+    post: PostModel | null;
+    loading: boolean;
+    fade: boolean;
+}
+
+export class PostView extends PureComponent <Props, State>  {
 
     state = {
         post: null,
+        loading: true,
+        fade: false,
     }
 
     async componentDidMount() {
-        const { match : { params : { slug } } } : any = this.props;
+        const { match : { params : { slug } } } : Props = this.props;
         const post = await NetworkService.getPostBySlug(slug);
-        this.setState({ post });
+        this.setState({ post, fade: true }, () => {
+            setTimeout(() => {
+                this.setState({ fade: false, loading: false });
+            }, 1000)
+        });
     }
 
     render() {
-        const { post }: any = this.state;
-    
-        if(post === null) return null;
+        const { post, loading, fade }: State = this.state;
 
-        const { photo, content, location: { location }, date, title, titleColour } = post;
+        if (loading) return <Loading fade={fade} />;
+    
+        if (post === null) return null;
+
+        const { content } : any = post;
 
         return (
             <PostViewWrapper>
 
                 <ScrollProgress />
+
+                <ScrollTop />
 
                 <PostHeader
                     post={post}
@@ -38,6 +66,9 @@ export class PostView extends PureComponent  {
 
                     <PostContent content={content} />
                 </ContentWrapper>
+
+                <Footer />
+
             </PostViewWrapper>
         );
     }

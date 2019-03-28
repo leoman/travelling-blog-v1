@@ -153,13 +153,13 @@ class ListView extends PureComponent <ListViewProps, ListViewState> {
                                     <Th>
                                         Date
                                     </Th>
-                                    <Th colSpan={2}>
+                                    <Th colSpan={3}>
 
                                     </Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {posts.map(({ id, title, date, status }, i) => (
+                                {posts.map(({ id, slug, title, date, status }, i) => (
                                     <Tr key={i.toString()}>
                                         <Td>
                                             {title}
@@ -169,6 +169,11 @@ class ListView extends PureComponent <ListViewProps, ListViewState> {
                                         </Td>
                                         <Td>
                                             {moment(date).format("MMMM Do YYYY")}
+                                        </Td>
+                                        <Td>
+                                            <Link to={`/admin/posts/preview/${slug}`}>
+                                                <Button outline="true" color="primary">Preview</Button>
+                                            </Link>
                                         </Td>
                                         <Td>
                                             <Link to={`/admin/posts/edit/${id}`}>
