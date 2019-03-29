@@ -5,11 +5,14 @@ https://charleslbryant.gitbooks.io/hello-react-and-typescript/content/TypeScript
 Front-end
 -----------
 
-Add route clustering to the map: http://istarkov.github.io/google-map-clustering-example/
+Add hooks into react build
 
 Backend
 -----------
-NodeSQL
+Add typescript to Backend
+Add loggin into system
+Add DB backups
+Add auto restart to application
 
 Hosting
 -----------
