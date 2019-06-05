@@ -29,7 +29,7 @@ class Map extends PureComponent <MarkersProps> {
 
     const globalWindow: GlobalWindow = window;
 
-    const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || 'AIzaSyAJF1BL1LJ-ZTDQTqEY8ZtrLx-DF__P2GE';
+    const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || '';
 
     if (globalWindow && globalWindow.google) {
       this.initMap();
