@@ -36,7 +36,7 @@ class Markers extends PureComponent <MarkersProps> {
 
   setMarkerPixels() {
     const { posts, projection } = this.props;
-    const markers = posts.map((post: PostModel) => {
+    const markers = posts.filter(post => !post.location.hideFromBounding).map((post: PostModel) => {
       const latLng = new google.maps.LatLng(post.location.lat, post.location.lng);
       return {
         ...post,
