@@ -30,6 +30,7 @@ export const ListWrapper = styled.div`
 
     @media all and (max-width: 768px) {
         width: 100%;
+        border-left: none;
     }
 `;
 
