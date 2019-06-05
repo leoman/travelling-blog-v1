@@ -46,12 +46,12 @@ export const HoverPanel = styled.div`
 export const Title = styled.span`
     color: #fff;
     padding: 20px;
-    font-size: 20px;
+    font-size: 24px;
     letter-spacing: 1px;
     box-sizing: border-box;
     transition: all 2s cubic-bezier(0.21, 1, 0.84, 1.01);
-    font-family: 'Martel Sans', sans-serif;
-    font-weight: 400;
+    font-family: 'Shadows Into Light', cursive;
+    font-weight: bold;
     box-sizing: border-box;
     width: calc(100%);
 

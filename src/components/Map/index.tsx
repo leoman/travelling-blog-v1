@@ -1,110 +1,112 @@
 import React, { PureComponent } from 'react';
-import GoogleMapReact from 'google-map-react';
 import { PostModel } from '../../models/PostModel';
-import MapMarker from '../MapMarker';
+import Markers from '../MapMarkers';
 import { MapWrapper } from './styles';
 
-type MapProps = {
-    zoom: number;
-    posts: PostModel[];
-    hoveredLocationKey: null | number;
+type MarkersProps = {
+  posts: PostModel[];
+  hoveredLocationKey: number | null;
 }
 
-class Map extends PureComponent <MapProps> {
-    
-    static defaultProps = {
-        zoom: 11
+interface GlobalWindow extends Window {
+  google?: any; 
+}
+
+class Map extends PureComponent <MarkersProps> {
+  gmapScript: HTMLScriptElement | null;
+
+  constructor(props: MarkersProps) {
+    super(props);
+    this.state = {
+      map: null,
+      projection: null,
     };
 
-    getMapBounds = (map:google.maps.Map, maps:any, posts:PostModel[]) => {
-        const bounds = new maps.LatLngBounds();
-      
-        posts.filter(post => !post.location.hideFromBounding).forEach((post:PostModel) => {
-            bounds.extend(new maps.LatLng(
-                post.location.lat,
-                post.location.lng,
-            ));
-        });
-        return bounds;
-    };
+    this.gmapScript = null;
+  }
 
-    bindResizeListener = (map:google.maps.Map, maps:any, bounds:google.maps.LatLngBounds) => {
-        maps.event.addDomListenerOnce(map, 'idle', () => {
-            maps.event.addDomListener(window, 'resize', () => {
-                map.fitBounds(bounds);
-            });
-        });
-    };
+  componentDidMount() {
 
-    travelPath = (map:google.maps.Map, maps:any, posts:PostModel[]) => {
+    const globalWindow: GlobalWindow = window;
 
-        const path = posts.map((post:PostModel) => ({
-            lat: post.location.lat,
-            lng: post.location.lng,
-        }));
+    const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || 'AIzaSyAJF1BL1LJ-ZTDQTqEY8ZtrLx-DF__P2GE';
 
-        const lineSymbol = {
-            path: 'M 0,-1 0,1',
-            strokeOpacity: 1,
-            scale: 4
-        };
+    if (globalWindow && globalWindow.google) {
+      this.initMap();
+    } else {
+      this.gmapScript = document.createElement('script');
+      this.gmapScript.type = 'text/javascript';
+      this.gmapScript.src = `https://maps.googleapis.com/maps/api/js?key=${key}`;
+      const x = document.getElementsByTagName('script')[0];
+      if(x.parentNode) x.parentNode.insertBefore(this.gmapScript, x);
 
-        const flightPath = new maps.Polyline({
-            path: path,
-            geodesic: true,
-            icons: [{
-                icon: lineSymbol,
-                offset: '0',
-                repeat: '20px'
-              }],
-            strokeColor: '#FF0000',
-            strokeOpacity: 0,
-            strokeWeight: 2
-        });
-
-        flightPath.setMap(map);  
+      this.gmapScript.addEventListener('load', e => {
+        this.initMap();
+      });
     }
+  }
 
-    apiIsLoaded = (map:google.maps.Map, maps:any, posts:PostModel[]) => {
-        this.travelPath(map, maps, posts);
-        const bounds = this.getMapBounds(map, maps, posts);
-        map.fitBounds(bounds);
-        this.bindResizeListener(map, maps, bounds);
+  initMap() {
+    const that = this;
+    setTimeout(() => {
+      const map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 1,
+        center: { lat: -6.709618, lng: -2.607743 },
+      });
+
+      const Overlay = new google.maps.OverlayView();
+      Overlay.setMap(map);
+      Overlay.draw = function () {};
+
+      Overlay.onAdd = function () {
+        const projection = this.getProjection();
+        that.setFlightPath(map, projection);
+      };
+    }, 200);
+  }
+
+  setFlightPath(map: any, projection: any) {
+    const { posts } = this.props;
+
+    const lineSymbol = {
+      path: 'M 0,-1 0,1',
+      strokeOpacity: 1,
+      scale: 4,
     };
 
-    render() {
-        const { posts, hoveredLocationKey } = this.props;
+    const path = posts.map((post) => ({
+      lat: post.location.lat,
+      lng: post.location.lng,
+    }));
 
-        const [firstPost] = posts;
-        const center = {
-            lat: firstPost.location.lat,
-            lng: firstPost.location.lng
-        };
-        const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || '';
+    const flightPath = new google.maps.Polyline({
+      path,
+      geodesic: false,
+      icons: [{
+        icon: lineSymbol,
+        offset: '0',
+        repeat: '20px',
+      }],
+      strokeColor: '#FF0000',
+      strokeOpacity: 0,
+      strokeWeight: 2,
+    });
 
-        return (
-            <MapWrapper>
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key: key }}
-                    defaultCenter={center}
-                    defaultZoom={this.props.zoom}
-                    yesIWantToUseGoogleMapApiInternals
-                    onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps, posts)}
-                >
-                    {posts.map((post, i) => (
-                        <MapMarker
-                            key={i}
-                            lat={post.location.lat}
-                            lng={post.location.lng}
-                            hovered={i === hoveredLocationKey}
-                            post={post}
-                        />
-                    ))}
-                    
-                </GoogleMapReact>
-            </MapWrapper>
-        );
-    }
+    flightPath.setMap(map);
+
+    this.setState({ map, projection });
+  }
+
+  render() {
+    const { map, projection }: any = this.state;
+    const { posts, hoveredLocationKey } = this.props;
+    return (
+      <MapWrapper>
+        <div style={{ width: '100%', height: '100%', zIndex: 1 }} id="map" />
+        {(map && posts && projection) && <Markers map={map} posts={posts} projection={projection} hoveredLocationKey={hoveredLocationKey} />}
+      </MapWrapper>
+    );
+  }
 }
 
 export default Map;

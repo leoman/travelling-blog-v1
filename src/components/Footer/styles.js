@@ -42,7 +42,7 @@ export const Link = styled.a`
     letter-spacing: 1px;
     text-decoration: none;
     text-transform: uppercase;
-    font-family: Arial,sans-serif;
+    font-family: 'lato','HelveticaNeue','Helvetica Neue','Helvetica-Neue',Helvetica,Arial,sans-serif;
 `;
 
 export const TextWrapper = styled.div`
@@ -51,7 +51,7 @@ export const TextWrapper = styled.div`
 `
 
 export const CopyRight = styled.div`
-    font-family: Arial,sans-serif;
+    font-family: 'lato','HelveticaNeue','Helvetica Neue','Helvetica-Neue',Helvetica,Arial,sans-serif;
     font-size: 15px;
     font-weight: 500;
     letter-spacing: 1px;

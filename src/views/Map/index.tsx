@@ -3,9 +3,8 @@ import NetworkService from '../../service';
 import Map from '../../components/Map';
 import LocationList from '../../components/LocationList';
 import MapViewModel from '../../models/MapViewModel';
-import { PostModel } from '../../models/PostModel';
 import Loading from '../../components/Loading';
-import { MapViewWrapper, MapWrapper, ListWrapper } from './styles';
+import { MapViewWrapper, MapWrapper, ListWrapper, NavigationToggle, TitleWrapper, Title } from './styles';
 
 export class MapView extends PureComponent <MapViewModel> {
 
@@ -14,6 +13,7 @@ export class MapView extends PureComponent <MapViewModel> {
         posts: null,
         loading: true,
         fade: false,
+        navigationShown: true,
     }
 
     async componentDidMount() {
@@ -28,8 +28,10 @@ export class MapView extends PureComponent <MapViewModel> {
 
     listItemHovered = (hoveredLocationKey: number) => this.setState({hoveredLocationKey})
 
+    toggleNavigation = (navigationShown: boolean) => this.setState({navigationShown: !navigationShown})
+
     render() {
-        const { hoveredLocationKey, posts, loading, fade } = this.state;
+        const { hoveredLocationKey, posts, loading, fade, navigationShown } = this.state;
 
         if (loading) return <Loading fade={fade} />;
 
@@ -37,10 +39,19 @@ export class MapView extends PureComponent <MapViewModel> {
 
         return (
             <MapViewWrapper>
-                <MapWrapper>
+                <TitleWrapper>
+                    <Title navigation={false}>
+                        Kirsty and Petes Travel Adventure
+                    </Title>
+                </TitleWrapper>
+                <MapWrapper navigationShown={navigationShown}>
+                    <NavigationToggle onClick={() => this.toggleNavigation(navigationShown)} />
                     <Map posts={posts} hoveredLocationKey={hoveredLocationKey} />
                 </MapWrapper>
-                <ListWrapper>
+                <ListWrapper navigationShown={navigationShown}>
+                    <Title navigation>
+                        Kirsty and Petes Travel Adventure
+                    </Title>
                     <LocationList posts={posts} listItemHovered={this.listItemHovered} />
                 </ListWrapper>
             </MapViewWrapper>

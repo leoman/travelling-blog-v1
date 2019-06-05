@@ -100,6 +100,7 @@ export const Days = styled(Text)`
     position: absolute;
     left: -35px;
     top: -35px;
+    font-family: 'Shadows Into Light', cursive;
 
     ${TitleWrapper}:hover & {
         transform: scale(1.2) translate(-25px, -15px);
@@ -110,6 +111,7 @@ export const Title = styled(Text)`
     line-height: 48px;
     font-weight: 200;
     text-transform: uppercase;
+    font-family: 'Indie Flower', cursive;
     text-align: center;
     font-size: 3rem;
 
@@ -123,6 +125,7 @@ export const Location = styled(Text)`
     position: absolute;
     bottom: -35px;
     right: -35px;
+    font-family: 'Shadows Into Light', cursive;
 
     ${TitleWrapper}:hover & {
         transform: scale(1.2) translate(25px, 15px);

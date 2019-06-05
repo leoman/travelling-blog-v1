@@ -79,4 +79,5 @@ export const H1 = styled.h1`
     color: #fff;
     margin: 0 0 20px 0!important;
     font-weight: bold!important;
+    font-family: 'Indie Flower', cursive!important;
 `;

@@ -5,6 +5,7 @@ export const MapMarkerWrapper = styled.div`
     position: absolute;
     transform: translate(-50%, -50%);
     cursor: pointer;
+    pointer-events: all;
 `;
 
 export const MarkerImage = styled(Link)`
@@ -16,6 +17,7 @@ export const MarkerImage = styled(Link)`
     border: 3px solid #ffffff;
     border-radius: 60px;
     display: block;
+    pointer-events: all;
 
     &:hover {
         height: 60px;
