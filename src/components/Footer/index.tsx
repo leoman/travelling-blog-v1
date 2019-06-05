@@ -1,13 +1,13 @@
 import React from 'react';
 import moment from 'moment';
-import { FooterWrapper, Links, Link, TextWrapper, CopyRight } from './styles';
+import { FooterWrapper, Links, FooterLink, TextWrapper, CopyRight } from './styles';
 
 export const Footer = () => (
     <FooterWrapper>
        
         <Links>
-            <Link to={'/'}>Home</Link>
-            <Link to={'/posts'}>Articles</Link>
+            <FooterLink to={'/'}>Home</FooterLink>
+            <FooterLink to={'/posts'}>Articles</FooterLink>
         </Links>
         
         <TextWrapper>

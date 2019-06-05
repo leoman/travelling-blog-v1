@@ -130,7 +130,7 @@ class Loading extends PureComponent <Props> {
 
                 <SVGWrapper>
 
-                    <SVG className="mainSVG" style={{height: '300px', width: '300px'}} viewBox="300 150 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <SVG className="mainSVG"  viewBox="300 150 300 300" xmlns="http://www.w3.org/2000/svg">
                         <defs>   
                             <circle id="dot"  cx="0" cy="0" r="5" fill="#0371ac"/>   
                         </defs>

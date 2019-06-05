@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 export const FooterWrapper = styled.div`
     padding: 30px;
@@ -31,16 +32,19 @@ export const FooterWrapper = styled.div`
 `;
 
 export const Links = styled.div`
-
+    @media all and (max-width: 768px) {
+        padding-bottom: 20px;
+    }
 `;
 
-export const Link = styled.a`
+export const FooterLink = styled(Link)`
     display: block;
     padding-top: 15px;
     font-size: 15px;
     font-weight: 500;
     letter-spacing: 1px;
     text-decoration: none;
+    color: #000000;
     text-transform: uppercase;
     font-family: 'lato','HelveticaNeue','Helvetica Neue','Helvetica-Neue',Helvetica,Arial,sans-serif;
 `;
@@ -55,4 +59,9 @@ export const CopyRight = styled.div`
     font-size: 15px;
     font-weight: 500;
     letter-spacing: 1px;
+
+    @media all and (max-width: 768px) {
+        padding: 20px;
+        line-height: 1.2;
+    }
 `;

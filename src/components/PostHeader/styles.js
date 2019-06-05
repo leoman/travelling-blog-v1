@@ -65,6 +65,10 @@ export const HoverWrapper = styled.div`
     max-width: 55%;
     margin: 0 auto;
 
+    @media all and (max-width: 768px) {
+        max-width: 75%;
+    }
+
     &::before {
         content: " ";
         position: absolute;

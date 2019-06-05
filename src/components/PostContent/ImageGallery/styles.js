@@ -37,6 +37,10 @@ export const Grid = styled.main`
     grid-gap: 20px;
     align-items: stretch;
     justify-items: center;
+
+    @media all and (max-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
 `;
 
 const randomGen = () => {
