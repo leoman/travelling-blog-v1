@@ -134,6 +134,6 @@ export const ContentWrapper = styled.div`
 
 export const FacebookComments = styled.div`
     iframe {
-        width: 100%;
+        width: 100%!important;
     }
 `;

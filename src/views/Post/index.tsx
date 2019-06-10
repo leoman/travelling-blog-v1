@@ -74,7 +74,7 @@ export class PostView extends PureComponent <Props, State>  {
                     <PostContent content={content} />
                 </ContentWrapper>
 
-                <FacebookComments style={{width: '100%'}} className="fb-comments" data-href={`http://kirstyandpete.com/posts/${slug}`} data-width="100%" data-numposts="5"></FacebookComments>
+                <FacebookComments className="fb-comments" data-href={`http://kirstyandpete.com/posts/${slug}`} data-width="100%" data-numposts="5"></FacebookComments>
                 
                 <Footer />
 
