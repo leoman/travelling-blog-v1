@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import NetworkService from '../../service';
 import ScrollProgress from '../../components/ScrollProgress';
 import ScrollTop from '../../components/ScrollTop';
-import { PostViewWrapper, Header, ContentWrapper, TitleWrapper, HoverWrapper, TextWrapper, Days, Title, Location } from './styles';
+import { PostViewWrapper, ContentWrapper, FacebookComments } from './styles';
 import PostHeader from '../../components/PostHeader';
 import PostContent from '../../components/PostContent';
 import Footer from '../../components/Footer';
@@ -23,6 +23,10 @@ interface State {
     fade: boolean;
 }
 
+interface GlobalWindow extends Window {
+    FB?: any; 
+  }
+
 export class PostView extends PureComponent <Props, State>  {
 
     state = {
@@ -32,6 +36,7 @@ export class PostView extends PureComponent <Props, State>  {
     }
 
     async componentDidMount() {
+        const globalWindow: GlobalWindow = window;
         const { match : { params : { slug } } } : Props = this.props;
         const post = await NetworkService.getPostBySlug(slug);
         this.setState({ post, fade: true }, () => {
@@ -39,6 +44,8 @@ export class PostView extends PureComponent <Props, State>  {
                 this.setState({ fade: false, loading: false });
             }, 1000)
         });
+
+        setTimeout(() => globalWindow.FB.XFBML.parse(), 2000);
     }
 
     render() {
@@ -67,8 +74,8 @@ export class PostView extends PureComponent <Props, State>  {
                     <PostContent content={content} />
                 </ContentWrapper>
 
-                <div className="fb-comments" data-href={`http://kirstyandpete.com/posts/${slug}`} data-width="100%" data-numposts="5"></div>
-
+                <FacebookComments style={{width: '100%'}} className="fb-comments" data-href={`http://kirstyandpete.com/posts/${slug}`} data-width="100%" data-numposts="5"></FacebookComments>
+                
                 <Footer />
 
             </PostViewWrapper>

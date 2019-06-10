@@ -131,3 +131,9 @@ export const Location = styled(Text)`
 
 export const ContentWrapper = styled.div`
 `;
+
+export const FacebookComments = styled.div`
+    iframe {
+        width: 100%;
+    }
+`;
