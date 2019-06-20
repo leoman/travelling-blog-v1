@@ -8,8 +8,10 @@ type MarkersProps = {
   hoveredLocationKey: number | null;
 }
 
-interface GlobalWindow extends Window {
-  google?: any; 
+declare global {
+  interface Window {
+    google: any;
+  }
 }
 
 class Map extends PureComponent <MarkersProps> {
@@ -27,11 +29,11 @@ class Map extends PureComponent <MarkersProps> {
 
   componentDidMount() {
 
-    const globalWindow: GlobalWindow = window;
+    // const globalWindow: GlobalWindow = window;
 
     const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || '';
 
-    if (globalWindow && globalWindow.google) {
+    if (window && window.google) {
       this.initMap();
     } else {
       this.gmapScript = document.createElement('script');
@@ -46,13 +48,34 @@ class Map extends PureComponent <MarkersProps> {
     }
   }
 
+  getMapBounds = (map:google.maps.Map) => {
+    const { posts } = this.props;
+    const bounds = new google.maps.LatLngBounds();	  
+
+     posts.forEach((post:PostModel) => {	
+        bounds.extend(new google.maps.LatLng(	
+            post.location.lat,	
+            post.location.lng,	
+        ));	
+    });
+
+    return bounds;	
+};
+
   initMap() {
     const that = this;
     setTimeout(() => {
       const map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 1,
+        zoom: 5,
         center: { lat: -6.709618, lng: -2.607743 },
       });
+
+      const bounds = this.getMapBounds(map);
+      map.fitBounds(bounds);
+
+      setTimeout(() => {
+        map.setCenter({ lat: -6.709618, lng: -2.607743 });
+      }, 100);
 
       const Overlay = new google.maps.OverlayView();
       Overlay.setMap(map);

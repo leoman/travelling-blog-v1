@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export interface LocationModel {
     duration: number;
     lat: number;
@@ -11,6 +13,10 @@ export enum Status {
     live = "live",
 }
 
+export interface PhotoModel {
+    url: string;
+}
+
 export interface PostModel {
     id?: number;
     title: string;
@@ -20,7 +26,9 @@ export interface PostModel {
     date: Date;
     content?: string;
     status: Status;
+    order: Date;
     location: LocationModel
+    photos?: PhotoModel[]
 }
 
 export const initialState: PostModel = {
@@ -29,6 +37,7 @@ export const initialState: PostModel = {
     content: '',
     photo: '',
     date: new Date(),
+    order: new Date(moment().format('YYYY-MM-DD')),
     status: Status.draft,
     location: { 
         location: '',

@@ -23,9 +23,11 @@ interface State {
     fade: boolean;
 }
 
-interface GlobalWindow extends Window {
-    FB?: any; 
-  }
+declare global {
+    interface Window {
+        FB: any;
+    }
+}
 
 export class PostView extends PureComponent <Props, State>  {
 
@@ -36,7 +38,6 @@ export class PostView extends PureComponent <Props, State>  {
     }
 
     async componentDidMount() {
-        const globalWindow: GlobalWindow = window;
         const { match : { params : { slug } } } : Props = this.props;
         const post = await NetworkService.getPostBySlug(slug);
         this.setState({ post, fade: true }, () => {
@@ -45,7 +46,7 @@ export class PostView extends PureComponent <Props, State>  {
             }, 1000)
         });
 
-        setTimeout(() => globalWindow.FB.XFBML.parse(), 2000);
+        setTimeout(() => window.FB.XFBML.parse(), 2000);
     }
 
     render() {

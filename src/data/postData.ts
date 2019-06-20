@@ -9,6 +9,7 @@ export const postData: PostModel[] = [
         titleColour: '#000000',
         content: '',
         date: new Date(moment().subtract(10, 'days').format()),
+        order: new Date(),
         photo: 'photo-6.jpg',
         status: Status.draft,
         location: {
@@ -28,6 +29,7 @@ export const postData: PostModel[] = [
         content: '',
         status: Status.draft,
         date: new Date(moment().subtract(9, 'days').format()),
+        order: new Date(),
         location: {
             lat: 21.161907,
             lng: -86.851524,
@@ -43,6 +45,7 @@ export const postData: PostModel[] = [
         photo: 'photo-4.jpg',
         status: Status.draft,
         date: new Date(moment().subtract(7, 'days').format()),
+        order: new Date(),
         location: {
             duration: 3,
             lat: 17.477763,
@@ -58,6 +61,7 @@ export const postData: PostModel[] = [
         photo: 'photo-3.jpg',
         status: Status.draft,
         date: new Date(moment().subtract(5, 'days').format()),
+        order: new Date(),
         location: {
             duration: 3,
             lat: 14.580053,
@@ -73,6 +77,7 @@ export const postData: PostModel[] = [
         photo: 'photo-2.jpg',
         status: Status.draft,
         date: new Date(moment().subtract(2, 'days').format()),
+        order: new Date(),
         location: {
             duration: 3,
             lat: 14.073249,
@@ -89,6 +94,7 @@ export const postData: PostModel[] = [
         status: Status.draft,
         date: new Date(),
         content: `<h1>Our first day in Nicaragua</h1><br /><p>Isnt this exciting</p>`,
+        order: new Date(),
         location: {
             duration: 3,
             lat: 12.291366,
