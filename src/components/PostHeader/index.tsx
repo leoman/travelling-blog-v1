@@ -4,7 +4,7 @@ import { Header, TitleWrapper, HoverWrapper, TextWrapper, Days, Title, Location 
 
 export const PostHeader = ({ post : { photo, location: { location }, date, title, titleColour } }: any ) => (
     <TitleWrapper
-        style={{backgroundImage: `url(/images/${photo})`}}
+        style={{backgroundImage: `url(${photo})`}}
     >
         <Header>
             <HoverWrapper>
