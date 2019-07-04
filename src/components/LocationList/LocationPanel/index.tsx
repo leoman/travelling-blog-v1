@@ -10,7 +10,7 @@ export interface LocationPanelModel {
 
 export const LocationPanel: SFC<LocationPanelModel> = ({ post: { title, photo, slug }, listItemHovered, i }) => (
     <PanelWrapper to={`/posts/${slug}`} onMouseEnter={() => listItemHovered(i)} onMouseLeave={() => listItemHovered(null)} >
-        <ImagePane src={`/images/${photo}`} />
+        <ImagePane src={photo} />
         <HoverPanel>
             <Title>{title}</Title>
         </HoverPanel>
