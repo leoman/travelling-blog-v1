@@ -28,7 +28,7 @@ export interface PostModel {
     status: Status;
     order: Date;
     location: LocationModel
-    photos?: PhotoModel[]
+    photos: PhotoModel[]
 }
 
 export const initialState: PostModel = {
@@ -44,7 +44,8 @@ export const initialState: PostModel = {
         duration: 0,
         lat: 0, 
         lng: 0,
-    }
+    },
+    photos: [],
 }
 
 // export interface Locations {

@@ -6,9 +6,18 @@ interface Props {
         url: string;
     }>;
     openLightBox(index: number): void;
+    lightBoxImageCount: number;
 }
 
 class ImageGallery extends PureComponent <Props> {
+
+    getImagePosition(pos: number) : number {
+        const { lightBoxImageCount } = this.props;
+        const actualPos = Number(pos + (lightBoxImageCount - 1));
+
+        return actualPos;
+    }
+
     render() {
         const { images, openLightBox } = this.props;
         if (!images) return null;
@@ -22,7 +31,7 @@ class ImageGallery extends PureComponent <Props> {
                             <Grid>
                                 {images.map(({ url }, i) => (
                                     <ImageWrapper key={i.toString()}>
-                                        <Image onClick={() => openLightBox(i)} src={url} alt="Sample photo" />
+                                        <Image onClick={() => openLightBox(this.getImagePosition(i))} src={url} alt="" />
                                     </ImageWrapper>
                                 ))}
                             </Grid>

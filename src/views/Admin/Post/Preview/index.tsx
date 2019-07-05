@@ -14,6 +14,7 @@ export class PostView extends PureComponent  {
 
     state = {
         post: null,
+        photos: [],
     }
 
     async componentDidMount() {
@@ -29,7 +30,7 @@ export class PostView extends PureComponent  {
 
         console.log(post);
 
-        const { content } = post;
+        const { content, photos } = post;
 
         return (
             <PostViewWrapper>
@@ -45,7 +46,7 @@ export class PostView extends PureComponent  {
                 />
 
                 <ContentWrapper>
-                    <PostContent content={content} />
+                    <PostContent content={content} photos={photos} />
                 </ContentWrapper>
             </PostViewWrapper>
         );

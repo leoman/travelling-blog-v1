@@ -56,7 +56,7 @@ export class PostView extends PureComponent <Props, State>  {
     
         if (post === null) return null;
 
-        const { content, slug } : any = post;
+        const { content, slug, photos } : any = post;
 
         return (
             <PostViewWrapper>
@@ -72,7 +72,7 @@ export class PostView extends PureComponent <Props, State>  {
                 <ContentWrapper>
                     {/* <Link to={'/'}>Back to homepage</Link> */}
 
-                    <PostContent content={content} />
+                    <PostContent content={content} photos={photos} />
                 </ContentWrapper>
 
                 <FacebookComments className="fb-comments" data-href={`http://kirstyandpete.com/posts/${slug}`} data-width="100%" data-numposts="5"></FacebookComments>
