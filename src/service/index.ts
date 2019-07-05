@@ -51,6 +51,16 @@ class NetworkService {
         return RequestService.delete(url);
     }
 
+    addPhotoToPost(id: number, data: object) {
+        const url = `${BASE_URL}/photos/${id}`;
+        return RequestService.post(url, data);
+    }
+
+    deletePhoto(id: number) {
+        const url = `${BASE_URL}/photos/${id}`;
+        return RequestService.delete(url);
+    }
+
 }
 
 export default new NetworkService()

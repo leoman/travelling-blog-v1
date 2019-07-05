@@ -14,6 +14,7 @@ export enum Status {
 }
 
 export interface PhotoModel {
+    id?: number;
     url: string;
 }
 

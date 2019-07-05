@@ -66,6 +66,25 @@ class EditPost extends PureComponent <EditPostProps, EditPostState> {
         }
     }
 
+    onSaveImage = async (currentPhoto: string) => {
+        const { match : { params: { id } } } = this.props;
+        const { post } = this.state;
+
+        if (!post) return null;
+
+        const response = await NetworkService.addPhotoToPost(parseInt(id), { photo: currentPhoto });
+
+        if(response) {
+            this.setState({ message: 'Post has been updated' });
+            return response;
+        }
+        return false;
+    }
+
+    onDeleteImage = async (id: number) => {
+        return await NetworkService.deletePhoto(id);
+    }
+
     render() {
 
         const { post, message }: EditPostState = this.state;
@@ -97,7 +116,7 @@ class EditPost extends PureComponent <EditPostProps, EditPostState> {
                             <Button onClick={() => this.onSave()} outline="true" color="primary">Save Post</Button>
                         </ControlBar>
 
-                        <PostForm post={post} onChange={this.onChange} />
+                        <PostForm post={post} onChange={this.onChange} onSaveImage={this.onSaveImage} onDeleteImage={this.onDeleteImage} />
                     </Col>
                 </Row>
             </Container>
