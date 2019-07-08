@@ -13,6 +13,7 @@ export const PanelWrapper = styled(Link)`
 
 export const ImagePane = styled.img`
     object-fit: cover;
+    object-position: 50% 25%;
     transform-origin: 65% 75%;
     transition: all 2s cubic-bezier(0.21, 1, 0.84, 1.01);
     height: 100%;

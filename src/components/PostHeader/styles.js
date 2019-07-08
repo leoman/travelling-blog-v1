@@ -33,7 +33,7 @@ export const Header = styled.div`
 export const TitleWrapper = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: 50% 25%;
     width: 100%;
     height: 300px;
 
