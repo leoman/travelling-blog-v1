@@ -73,9 +73,9 @@ class Map extends PureComponent <MarkersProps> {
       const bounds = this.getMapBounds(map);
       map.fitBounds(bounds);
 
-      setTimeout(() => {
-        map.setCenter({ lat: -6.709618, lng: -2.607743 });
-      }, 100);
+      // setTimeout(() => {
+      //   map.setCenter({ lat: -6.709618, lng: -2.607743 });
+      // }, 100);
 
       const Overlay = new google.maps.OverlayView();
       Overlay.setMap(map);

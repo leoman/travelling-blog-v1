@@ -45,7 +45,7 @@ export class MapView extends PureComponent <MapViewModel> {
                     </Title>
                 </TitleWrapper>
                 <MapWrapper navigationShown={navigationShown}>
-                    <NavigationToggle onClick={() => this.toggleNavigation(navigationShown)} />
+                    {/* <NavigationToggle onClick={() => this.toggleNavigation(navigationShown)} /> */}
                     <Map posts={posts} hoveredLocationKey={hoveredLocationKey} />
                 </MapWrapper>
                 <ListWrapper navigationShown={navigationShown}>
