@@ -124,9 +124,16 @@ export const ContentWrapper = styled.div`
             width: 80%;
         }
 
+        @media (max-width: 767px) {
+            flex-direction: column;
+        }
         img {
             width: 50%;
             object-fit: cover;
+
+            @media (max-width: 767px) {
+                width: 100%;
+            }
         }
     }
 
